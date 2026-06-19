@@ -1,0 +1,85 @@
+@use '../utils/' as *;
+
+.toggle {
+    display: grid;
+    grid-template-columns: 1fr rem(48);
+    gap: rem(4.8) rem(8);
+    align-items: center;
+    border: none;
+    margin: 0;
+
+    .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+    }
+    
+    &__wrapper {
+        position: relative;
+        height: rem(24);
+    }
+    
+    &__label {
+        font-size: rem(14);
+        font-weight: 700;
+        color: var(--TEXT);
+    }
+    
+    input[type='radio'] {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 2;
+
+        &:focus-visible ~ .toggle__button {
+            border: rem(2) solid var(--FOCUS-RING);
+        }
+    }
+
+    #dark {
+        left: 0;
+    }
+
+    #light {
+        right: 0;
+    }
+    
+    &__background {
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        border-radius: rem(12);
+        background: var(--TOGGLE);
+        pointer-events: none;
+
+    }
+
+    &__button {
+        position: absolute;
+        left: rem(3);
+        top: rem(3);
+        width: rem(18);
+        height: rem(18);
+        border-radius: 50%;
+        background-color: var(--BACKGROUND);
+        transition: transform 0.2s ease-in-out;
+
+        @at-root #light:checked ~ #{&} {
+            transform: translateX(rem(24));
+        }
+    }
+
+}
